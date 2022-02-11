@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
+// import 'package:better_organizer/app/router/router.dart';
+import 'package:better_organizer/contact_list/list/view/contact_list_page.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Better Organizer',
-      home: HomePage(
+      home: MainPage(
         title: 'Better Organizer',
       ),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(
     fontSize: 30,
@@ -31,10 +33,7 @@ class _HomePageState extends State<HomePage> {
       'Index 0: Home',
       style: optionStyle,
     ),
-    Text(
-      'Index 1: Contact List',
-      style: optionStyle,
-    ),
+    ContactListPage(),
     Text(
       'Index 2: To Do List',
       style: optionStyle,
