@@ -13,6 +13,8 @@ dependencies:
   bloc: ^8.0.2
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
+  contact_list_repository:
+    path: packages/contact_list_repository
 
 dev_dependencies:
   flutter_test:

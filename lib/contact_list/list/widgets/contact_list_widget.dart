@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'contact_list_item.dart';
-import 'package:better_organizer/contact_list/example/examplary_list.dart';
+import 'package:contact_list_repository/contact_list_repository.dart';
 
 class ContactListWidget extends StatelessWidget {
   const ContactListWidget({Key? key}) : super(key: key);
