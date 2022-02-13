@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
-import 'package:marquee/marquee.dart';
+import 'address_widget.dart';
 
 class ContactInformations extends StatefulWidget {
   final Contact contact;
@@ -69,12 +69,7 @@ class _ContactInformationsState extends State<ContactInformations> {
             SizedBox(
               width: (MediaQuery.of(context).size.width - 150),
               height: 50,
-              child: Marquee(
-                text: widget.contact.address,
-                pauseAfterRound: const Duration(seconds: 3),
-                startPadding: 5,
-                blankSpace: 20,
-              ),
+              child: AddressWidget(address: widget.contact.address),
             )
           ],
         ),
