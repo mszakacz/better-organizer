@@ -15,6 +15,7 @@ dependencies:
   equatable: ^2.0.3
   contact_list_repository:
     path: packages/contact_list_repository
+  marquee: ^2.2.1
 
 dev_dependencies:
   flutter_test:
