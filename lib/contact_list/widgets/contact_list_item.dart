@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
-import 'package:better_organizer/app/app.dart';
 
 class ContactListItem extends StatelessWidget {
   final Contact contact;

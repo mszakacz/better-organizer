@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 
 class AddressWidget extends StatelessWidget {
-  final address;
+  final String address;
   const AddressWidget({Key? key, required this.address}) : super(key: key);
 
   @override

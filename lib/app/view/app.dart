@@ -15,7 +15,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Better Organizer',
-      home: MainPage(
+      home: const MainPage(
         title: 'Better Organizer',
       ),
       onGenerateRoute: _appRouter.onGenerateRoute,
