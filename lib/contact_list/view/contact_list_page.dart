@@ -44,7 +44,11 @@ class ContactListPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ContactListWidget(),
+      body: const ContactListWidget(),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => {},
+          backgroundColor: Colors.blue),
     );
   }
 }
