@@ -31,7 +31,6 @@ class ContactListPage extends StatelessWidget {
               ),
               contentPadding: const EdgeInsets.all(10.0),
               hintText: 'Search...',
-              // border: InputBorder.none),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(25),
