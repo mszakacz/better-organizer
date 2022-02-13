@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:better_organizer/app/router/router.dart';
-import 'package:better_organizer/contact_list/list/view/contact_list_page.dart';
+import 'package:better_organizer/contact_list/view/contact_list_page.dart';
 
 class App extends StatelessWidget {
   @override

@@ -46,7 +46,7 @@ class ContactListPage extends StatelessWidget {
       ),
       body: Column(
         children: const [
-          Center(child: ContactListWidget()),
+          // Center(child: ContactListWidget()),
         ],
       ),
     );
