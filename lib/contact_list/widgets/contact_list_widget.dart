@@ -7,15 +7,9 @@ class ContactListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //   itemBuilder: (BuildContext context, int index) =>
-    //       ContactListItem(contact: list[index]),
-    //   itemCount: list.length,
-    // );
     return ListView.builder(
-      itemBuilder: (BuildContext context, int index) => ListTile(
-        title: Text('Hello'),
-      ),
+      itemBuilder: (BuildContext context, int index) =>
+          ContactListItem(contact: list[index]),
       itemCount: list.length,
     );
   }
