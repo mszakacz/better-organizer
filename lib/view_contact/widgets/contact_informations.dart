@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:marquee/marquee.dart';
 
-class ContactInformations extends StatelessWidget {
+class ContactInformations extends StatefulWidget {
   final Contact contact;
   const ContactInformations({Key? key, required this.contact})
       : super(key: key);
 
+  @override
+  State<ContactInformations> createState() => _ContactInformationsState();
+}
+
+class _ContactInformationsState extends State<ContactInformations> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,50 +32,52 @@ class ContactInformations extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 30),
           child: Text(
-            '${contact.name} ${contact.lastname}',
+            '${widget.contact.name} ${widget.contact.lastname}',
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        // Table(
-        //   children: [
-        //     TableRow(
-        //       children: [
-        //         Text('Mobile:'),
-        //         Text('Mail:'),
-        //         Text('Addres:'),
-        //       ],
-        //     ),
-        //     TableRow(
-        //       children: [
-        //         Text('${contact.mobile}'),
-        //         Text('${contact.mail}'),
-        //         Text('${contact.address}'),
-        //       ],
-        //     )
-        //   ],
-        // ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Column(
-              children: const [
-                Text('Mobile:'),
-                Text('Mail:'),
-                Text('Addres:'),
-              ],
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: Icon(Icons.phone),
             ),
-            Column(
-              children: [
-                Text(contact.mobile),
-                Text(contact.mail),
-                Text(contact.address),
-              ],
+            Text(widget.contact.mobile),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: Icon(Icons.mail),
+            ),
+            Text(widget.contact.mail),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: Icon(Icons.location_pin),
+            ),
+            SizedBox(
+              width: (MediaQuery.of(context).size.width - 150),
+              height: 50,
+              child: Marquee(
+                text: widget.contact.address,
+                pauseAfterRound: const Duration(seconds: 3),
+                startPadding: 5,
+                blankSpace: 20,
+              ),
             )
           ],
-        )
+        ),
       ],
     );
   }
