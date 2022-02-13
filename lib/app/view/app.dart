@@ -1,15 +1,24 @@
+import 'package:better_organizer/app/app.dart';
 import 'package:flutter/material.dart';
-// import 'package:better_organizer/app/router/router.dart';
+import 'package:better_organizer/app/router/router.dart';
 import 'package:better_organizer/contact_list/view/contact_list_page.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final AppRouter _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Better Organizer',
       home: MainPage(
         title: 'Better Organizer',
       ),
+      onGenerateRoute: _appRouter.onGenerateRoute,
     );
   }
 }

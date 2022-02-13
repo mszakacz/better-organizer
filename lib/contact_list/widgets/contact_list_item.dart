@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:better_organizer/app/app.dart';
 
 class ContactListItem extends StatelessWidget {
   final Contact contact;
@@ -13,7 +14,7 @@ class ContactListItem extends StatelessWidget {
           '${contact.name} ${contact.lastname}',
         ),
         onTap: () =>
-            Navigator.of(context).pushNamed('viewContact', arguments: contact),
+            Navigator.of(context).pushNamed('view_contact', arguments: contact),
       ),
     );
   }

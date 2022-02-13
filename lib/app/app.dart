@@ -1,1 +1,2 @@
-export 'package:better_organizer/app/view/app.dart';
+export './view/app.dart';
+export './router/router.dart';
