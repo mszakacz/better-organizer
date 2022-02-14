@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:better_organizer/app/router/router.dart';
 import 'package:better_organizer/contact_list/view/contact_list_page.dart';
 import 'package:better_organizer/new_contact/new_contact.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatefulWidget {
