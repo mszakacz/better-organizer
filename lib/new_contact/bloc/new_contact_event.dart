@@ -28,3 +28,13 @@ class MailEditing extends NewContactEvent {
   final String mail;
   const MailEditing(this.mail);
 }
+
+class AddressEditing extends NewContactEvent {
+  final String address;
+  const AddressEditing(this.address);
+}
+
+class DesctriptionEditing extends NewContactEvent {
+  final String description;
+  const DesctriptionEditing(this.description);
+}

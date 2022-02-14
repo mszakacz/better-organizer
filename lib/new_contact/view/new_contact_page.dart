@@ -10,7 +10,7 @@ class NewContactPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Add New Contact'),
       ),
-      body: NewContactForm(),
+      body: const NewContactForm(),
     );
   }
 }

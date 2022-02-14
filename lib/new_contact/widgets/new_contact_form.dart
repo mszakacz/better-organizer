@@ -8,7 +8,7 @@ class NewContactForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 80),
+      padding: const EdgeInsets.fromLTRB(24, 80, 48, 80),
       child: BlocBuilder<NewContactBloc, NewContactState>(
         builder: (context, state) {
           return Column(
@@ -18,16 +18,83 @@ class NewContactForm extends StatelessWidget {
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(right: 30),
+                    child: Icon(Icons.person),
+                  ),
+                  Flexible(
+                    child: TextFormField(
+                      onChanged: (value) =>
+                          BlocProvider.of<NewContactBloc>(context)
+                              .add(NameEditing(value)),
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Flexible(
+                    child: TextFormField(
+                      onChanged: (value) =>
+                          BlocProvider.of<NewContactBloc>(context)
+                              .add(LastnameEditing(value)),
+                      decoration: const InputDecoration(
+                        labelText: 'Lastname',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 30),
                     child: Icon(Icons.phone),
                   ),
                   Flexible(
                     child: TextFormField(
-                      // controller: _nameTextController,
+                      onChanged: (value) =>
+                          BlocProvider.of<NewContactBloc>(context)
+                              .add(MobileEditing(value)),
+                      decoration: const InputDecoration(
+                        labelText: 'Mobile',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 30),
+                    child: Icon(Icons.mail),
+                  ),
+                  Flexible(
+                    child: TextFormField(
                       onChanged: (value) =>
                           BlocProvider.of<NewContactBloc>(context)
                               .add(MailEditing(value)),
                       decoration: const InputDecoration(
-                        labelText: 'Mobile',
+                        labelText: 'Mail',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 30),
+                    child: Icon(Icons.location_pin),
+                  ),
+                  Flexible(
+                    child: TextFormField(
+                      onChanged: (value) =>
+                          BlocProvider.of<NewContactBloc>(context)
+                              .add(AddressEditing(value)),
+                      decoration: const InputDecoration(
+                        labelText: 'Address',
                       ),
                     ),
                   ),
