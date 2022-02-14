@@ -15,6 +15,7 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
     on<MailEditing>(_onMailEditing);
     on<AddressEditing>(_onAddressEditing);
     on<DesctriptionEditing>(_onDescriptionEditing);
+    on<AddContact>(_onAddContact);
   }
 
   void _onNameEditing(NameEditing event, Emitter<NewContactState> emit) {
@@ -45,4 +46,6 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
     emit(state.copyWith(
         contact: state.contact.copyWith(description: event.description)));
   }
+
+  void _onAddContact(AddContact event, Emitter<NewContactState> emit) {}
 }

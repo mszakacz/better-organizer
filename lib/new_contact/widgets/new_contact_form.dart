@@ -8,7 +8,7 @@ class NewContactForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 80, 48, 80),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 60),
       child: BlocBuilder<NewContactBloc, NewContactState>(
         builder: (context, state) {
           return Column(
@@ -30,7 +30,7 @@ class NewContactForm extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Flexible(
                     child: TextFormField(
                       onChanged: (value) =>
@@ -99,6 +99,11 @@ class NewContactForm extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Crerate'),
               ),
             ],
           );
