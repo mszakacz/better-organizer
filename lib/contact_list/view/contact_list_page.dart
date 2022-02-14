@@ -46,7 +46,7 @@ class ContactListPage extends StatelessWidget {
       body: const ContactListWidget(),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => {},
+          onPressed: () => Navigator.of(context).pushNamed('new_contact'),
           backgroundColor: Colors.blue),
     );
   }
