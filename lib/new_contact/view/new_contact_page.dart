@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/widgets.dart';
 
 class NewContactPage extends StatelessWidget {
   const NewContactPage({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class NewContactPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Add New Contact'),
       ),
-      body: const Text('New Contact Form'),
+      body: NewContactForm(),
     );
   }
 }
