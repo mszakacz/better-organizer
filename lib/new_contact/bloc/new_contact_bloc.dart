@@ -49,11 +49,16 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
         contact: state.contact.copyWith(description: event.description)));
   }
 
-  void _onAddContact(AddContact event, Emitter<NewContactState> emit) async {
+  Future<void> _onAddContact(
+      AddContact event, Emitter<NewContactState> emit) async {
     emit(state.copyWith(status: NewContactStatus.posting));
     try {
       await contactRepository.addNewContact(state.contact);
       emit(state.copyWith(status: NewContactStatus.success));
+      emit(state.copyWith(
+        contact: const Contact(),
+        status: NewContactStatus.open,
+      ));
     } catch (e) {
       emit(state.copyWith(status: NewContactStatus.failure));
     }

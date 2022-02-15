@@ -13,42 +13,46 @@ class NewContactPage extends StatefulWidget {
 class _NewContactPageState extends State<NewContactPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add New Contact'),
-      ),
-      body: BlocBuilder<NewContactBloc, NewContactState>(
-        builder: (context, state) {
-          switch (state.status) {
-            case NewContactStatus.open:
-              return const NewContactForm();
+    return BlocListener<NewContactBloc, NewContactState>(
+      listenWhen: (previous, current) =>
+          current.status != previous.status &&
+          current.status == NewContactStatus.success,
+      listener: (context, state) => {
+        if (state.status == NewContactStatus.success)
+          Navigator.pop(
+              context, 'New contact has been created and posted successfully'),
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Add New Contact'),
+        ),
+        body: BlocBuilder<NewContactBloc, NewContactState>(
+          builder: (context, state) {
+            switch (state.status) {
+              case NewContactStatus.open:
+                return const NewContactForm();
 
-            case NewContactStatus.failure:
-              return const Center(
-                  child: Text(
-                'Failed to add a New Contact',
-              ));
+              case NewContactStatus.failure:
+                return const Center(
+                    child: Text(
+                  'Failed to add a New Contact',
+                ));
 
-            case NewContactStatus.success:
-              return const Center(
-                  child: Text(
-                'New contact has been created and posted successfully',
-              ));
-
-            default:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 50),
-                    Text('Posting the User...'),
-                  ],
-                ),
-              );
-          }
-        },
+              default:
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 50),
+                      Text('Posting the Contact...'),
+                    ],
+                  ),
+                );
+            }
+          },
+        ),
       ),
     );
   }

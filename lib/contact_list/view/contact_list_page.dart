@@ -46,7 +46,29 @@ class ContactListPage extends StatelessWidget {
       body: const ContactListWidget(),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => Navigator.of(context).pushNamed('new_contact'),
+          onPressed: () async {
+            final result = await Navigator.of(context).pushNamed('new_contact');
+            if (result != null) {
+              ScaffoldMessenger.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text('$result'),
+                  ),
+                );
+            }
+          },
+          // onPressed: () =>
+          //     Navigator.of(context).pushNamed('new_contact').whenComplete(
+          //           () => {
+          //             ScaffoldMessenger.of(context).showSnackBar(
+          //               const SnackBar(
+          //                 content: Text(
+          //                     'New contact has been created and posted successfully'),
+          //               ),
+          //             ),
+          //           },
+          //         ),
           backgroundColor: Colors.blue),
     );
   }
