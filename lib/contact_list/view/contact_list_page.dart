@@ -58,17 +58,6 @@ class ContactListPage extends StatelessWidget {
                 );
             }
           },
-          // onPressed: () =>
-          //     Navigator.of(context).pushNamed('new_contact').whenComplete(
-          //           () => {
-          //             ScaffoldMessenger.of(context).showSnackBar(
-          //               const SnackBar(
-          //                 content: Text(
-          //                     'New contact has been created and posted successfully'),
-          //               ),
-          //             ),
-          //           },
-          //         ),
           backgroundColor: Colors.blue),
     );
   }
