@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "better_organizer",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "better_organizer (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "contact_list_repository",
+            "cwd": "packages/contact_list_repository",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "contact_list_repository (profile mode)",
+            "cwd": "packages/contact_list_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        }
+    ]
+}
