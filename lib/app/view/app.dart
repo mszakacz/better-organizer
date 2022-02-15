@@ -4,6 +4,7 @@ import 'package:better_organizer/app/router/router.dart';
 import 'package:better_organizer/contact_list/view/contact_list_page.dart';
 import 'package:better_organizer/new_contact/new_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:contact_list_repository/contact_list_repository.dart';
 
 class App extends StatefulWidget {
   @override
@@ -18,7 +19,8 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => NewContactBloc(),
+          create: (context) =>
+              NewContactBloc(contactRepository: ContactRepository()),
         ),
       ],
       child: MaterialApp(

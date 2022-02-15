@@ -102,7 +102,9 @@ class NewContactForm extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<NewContactBloc>(context).add(AddContact());
+                },
                 child: const Text('Crerate'),
               ),
             ],

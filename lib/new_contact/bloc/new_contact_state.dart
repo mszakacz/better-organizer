@@ -1,9 +1,9 @@
 part of 'new_contact_bloc.dart';
 
 enum NewContactStatus {
-  initial,
+  open,
   failure,
-  loading,
+  success,
   posting,
 }
 

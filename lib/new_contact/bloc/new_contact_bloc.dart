@@ -6,9 +6,9 @@ part 'new_contact_event.dart';
 part 'new_contact_state.dart';
 
 class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
-  NewContactBloc()
+  NewContactBloc({required this.contactRepository})
       : super(const NewContactState(
-            contact: Contact(), status: NewContactStatus.initial)) {
+            contact: Contact(), status: NewContactStatus.open)) {
     on<NameEditing>(_onNameEditing);
     on<MobileEditing>(_onMobileEditing);
     on<LastnameEditing>(_onLastnameEditing);
@@ -17,6 +17,8 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
     on<DesctriptionEditing>(_onDescriptionEditing);
     on<AddContact>(_onAddContact);
   }
+
+  final ContactRepository contactRepository;
 
   void _onNameEditing(NameEditing event, Emitter<NewContactState> emit) {
     emit(state.copyWith(contact: state.contact.copyWith(name: event.name)));
@@ -47,5 +49,13 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
         contact: state.contact.copyWith(description: event.description)));
   }
 
-  void _onAddContact(AddContact event, Emitter<NewContactState> emit) {}
+  void _onAddContact(AddContact event, Emitter<NewContactState> emit) async {
+    emit(state.copyWith(status: NewContactStatus.posting));
+    try {
+      await contactRepository.addNewContact(state.contact);
+      emit(state.copyWith(status: NewContactStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: NewContactStatus.failure));
+    }
+  }
 }
