@@ -32,7 +32,7 @@ class _ContactInformationsState extends State<ContactInformations> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 30),
           child: Text(
-            '${widget.contact.name} ${widget.contact.lastname}',
+            '${widget.contact.name} ${widget.contact.lastname} id: ${widget.contact.id}',
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,

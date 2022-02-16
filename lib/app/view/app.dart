@@ -1,11 +1,11 @@
 import 'package:better_organizer/app/app.dart';
-import 'package:better_organizer/contact_list/bloc/contact_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:better_organizer/app/router/router.dart';
-import 'package:better_organizer/contact_list/view/contact_list_page.dart';
+import 'package:better_organizer/contact_list/contact_list.dart';
 import 'package:better_organizer/new_contact/new_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:better_organizer/view_contact/view_contact.dart';
 
 class App extends StatefulWidget {
   const App({
@@ -35,13 +35,20 @@ class _AppState extends State<App> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                NewContactBloc(contactRepository: ContactRepository()),
+            create: (context) => NewContactBloc(
+                contactRepository:
+                    RepositoryProvider.of<ContactRepository>(context)),
           ),
           BlocProvider(
-            create: (context) =>
-                ContactListBloc(repository: RepositoryProvider.of(context)),
-          )
+            create: (context) => ContactListBloc(
+                contactListRepository:
+                    RepositoryProvider.of<ContactListRepository>(context)),
+          ),
+          BlocProvider(
+            create: (context) => ViewContactBloc(
+                contactRepository:
+                    RepositoryProvider.of<ContactRepository>(context)),
+          ),
         ],
         child: MaterialApp(
           title: 'Better Organizer',

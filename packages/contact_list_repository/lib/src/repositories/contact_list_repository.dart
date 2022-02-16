@@ -33,6 +33,7 @@ class ContactListRepositoryFireStore extends ContactListRepository {
       for (final document in snapshot.docs) {
         _cache.add(
           Contact(
+            id: document.id,
             name: document.data()['name'] as String,
             lastname: document.data()['lastname'] as String,
             mobile: document.data()['mobile'] as String,

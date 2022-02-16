@@ -1,4 +1,7 @@
-class Contact {
+import 'package:equatable/equatable.dart';
+
+class Contact extends Equatable {
+  final String id;
   final String name;
   final String lastname;
   final String mobile;
@@ -7,6 +10,7 @@ class Contact {
   final String description;
 
   const Contact({
+    this.id = '',
     this.name = '',
     this.lastname = '',
     this.mobile = '',
@@ -16,6 +20,7 @@ class Contact {
   });
 
   Contact copyWith({
+    String? id,
     String? name,
     String? lastname,
     String? mobile,
@@ -24,6 +29,7 @@ class Contact {
     String? description,
   }) {
     return Contact(
+      id: id ?? this.id,
       name: name ?? this.name,
       lastname: lastname ?? this.lastname,
       mobile: mobile ?? this.mobile,
@@ -32,4 +38,15 @@ class Contact {
       description: description ?? this.description,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        lastname,
+        mobile,
+        mail,
+        address,
+        description,
+      ];
 }

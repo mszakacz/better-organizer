@@ -6,7 +6,7 @@ enum ContactListStatus {
   failure,
 }
 
-class ContactListState {
+class ContactListState extends Equatable {
   const ContactListState({
     required this.contactList,
     required this.visibleList,
@@ -20,7 +20,12 @@ class ContactListState {
   final ContactListStatus status;
 
   @override
-  List<Object> get props => [contactList, visibleList, searchingWord, status];
+  List<Object> get props => [
+        contactList,
+        visibleList,
+        searchingWord,
+        status,
+      ];
 
   ContactListState copyWith({
     List<Contact>? contactList,

@@ -6,21 +6,21 @@ part 'contact_list_event.dart';
 part 'contact_list_state.dart';
 
 class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
-  ContactListBloc({required this.repository})
+  ContactListBloc({required this.contactListRepository})
       : super(const ContactListState(
           status: ContactListStatus.loading,
           contactList: <Contact>[],
           visibleList: <Contact>[],
           searchingWord: '',
         )) {
-    repository
+    contactListRepository
         .contactList()
         .listen((contacts) => add(GetContactListEvent(contacts)));
     on<GetContactListEvent>(_onGetContactListEvent);
     on<SearchEvent>(_onSearchEvent);
   }
 
-  final ContactListRepository repository;
+  final ContactListRepository contactListRepository;
 
   void _onGetContactListEvent(
       GetContactListEvent event, Emitter<ContactListState> emit) {

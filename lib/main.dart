@@ -17,7 +17,8 @@ void main() async {
       ContactListRepositoryFireStore(firebaseFirestore: firebaseFirestore)
         ..refresh();
 
-  final ContactRepository _contactRepository = ContactRepository();
+  final ContactRepository _contactRepository =
+      ContactRepository(firebaseFirestore: firebaseFirestore);
 
   runApp(App(
     contactListRepository: _contactListRepository,
