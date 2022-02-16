@@ -8,6 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
 
 class App extends StatefulWidget {
+  const App({
+    Key? key,
+    required this.contactListRepository,
+    required this.contactRepository,
+  }) : super(key: key);
+  final ContactListRepository contactListRepository;
+  final ContactRepository contactRepository;
+
   @override
   State<App> createState() => _AppState();
 }
@@ -17,8 +25,13 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<ContactListRepository>(
-      create: (context) => ContactListRepositoryFireStore()..refresh(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<ContactListRepository>.value(
+            value: widget.contactListRepository),
+        RepositoryProvider<ContactRepository>.value(
+            value: widget.contactRepository),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
