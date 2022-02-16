@@ -11,6 +11,7 @@ class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
           status: ContactListStatus.loading,
           contactList: <Contact>[],
           visibleList: <Contact>[],
+          searchingWord: '',
         )) {
     repository
         .constactList()
@@ -29,6 +30,7 @@ class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
         contactList: event.contactList,
         visibleList: event.contactList,
         status: ContactListStatus.success,
+        searchingWord: '',
       ),
     );
   }
@@ -38,13 +40,17 @@ class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
     List<Contact> _contactList = state.contactList;
     List<Contact> _searchList = [];
     final String _searchingWord = event.searchingWord.toLowerCase();
-    _contactList.forEach((contact) {
+    for (var contact in _contactList) {
       if (contact.name.toLowerCase().contains(_searchingWord) ||
           contact.lastname.toLowerCase().contains(_searchingWord)) {
         _searchList.add(contact);
       }
-    });
+    }
+
     emit(state.copyWith(
-        visibleList: _searchList, status: ContactListStatus.success));
+      visibleList: _searchList,
+      status: ContactListStatus.success,
+      searchingWord: event.searchingWord,
+    ));
   }
 }
