@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/contact_list_bloc.dart';
+
 class ContactListPage extends StatelessWidget {
   const ContactListPage({Key? key}) : super(key: key);
 
@@ -21,9 +24,15 @@ class ContactListPage extends StatelessWidget {
                 decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey[200],
-              prefixIcon: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {},
+              prefixIcon: BlocBuilder<ContactListBloc, ContactListState>(
+                builder: (context, state) {
+                  return IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      print(state);
+                    },
+                  );
+                },
               ),
               suffixIcon: IconButton(
                 icon: const Icon(Icons.clear),
