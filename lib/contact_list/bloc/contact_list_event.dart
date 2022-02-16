@@ -12,3 +12,11 @@ class GetContactListEvent extends ContactListEvent {
 
   final List<Contact> contactList;
 }
+
+class SearchEvent extends ContactListEvent {
+  const SearchEvent({required this.searchingWord});
+  final String searchingWord;
+
+  @override
+  List<Object> get props => [searchingWord];
+}

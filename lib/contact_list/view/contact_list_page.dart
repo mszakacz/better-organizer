@@ -21,34 +21,34 @@ class ContactListPage extends StatelessWidget {
               color: Colors.white, borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: TextField(
+                onChanged: (value) => BlocProvider.of<ContactListBloc>(context)
+                    .add(SearchEvent(searchingWord: value)),
                 decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[200],
-              prefixIcon: BlocBuilder<ContactListBloc, ContactListState>(
-                builder: (context, state) {
-                  return IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      print(state);
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  prefixIcon: BlocBuilder<ContactListBloc, ContactListState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {},
+                      );
                     },
-                  );
-                },
-              ),
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: () {},
-              ),
-              contentPadding: const EdgeInsets.all(10.0),
-              hintText: 'Search...',
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(25),
-              ),
-            )),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {},
+                  ),
+                  contentPadding: const EdgeInsets.all(10.0),
+                  hintText: 'Search...',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                )),
           ),
         ),
       ),

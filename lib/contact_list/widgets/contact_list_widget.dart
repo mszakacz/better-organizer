@@ -10,11 +10,11 @@ class ContactListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ContactListBloc, ContactListState>(
       builder: (context, state) {
-        if (state is HasContactListState) {
+        if (state.status == ContactListStatus.success) {
           return ListView.builder(
             itemBuilder: (BuildContext context, int index) =>
-                ContactListItem(contact: state.contactList[index]),
-            itemCount: state.contactList.length,
+                ContactListItem(contact: state.visibleList[index]),
+            itemCount: state.visibleList.length,
           );
         } else {
           return const Center(child: CircularProgressIndicator());
