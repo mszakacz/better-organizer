@@ -16,6 +16,9 @@ dependencies:
   contact_list_repository:
     path: packages/contact_list_repository
   marquee: ^2.2.1
+  firebase_core: ^1.12.0
+  cloud_firestore: ^3.1.8
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:
