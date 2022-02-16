@@ -17,29 +17,27 @@ class ContactListRepositoryFireStore extends ContactListRepository {
 
   @override
   void refresh() {
-    if (FirebaseFirestore.instance != null) {
-      FirebaseFirestore.instance
-          .collection('contactList')
-          .orderBy('lastname')
-          .snapshots()
-          .listen((snapshot) {
-        _cache.clear();
-        for (final document in snapshot.docs) {
-          _cache.add(
-            Contact(
-              name: document.data()['name'] as String,
-              lastname: document.data()['lastname'] as String,
-              mobile: document.data()['mobile'] as String,
-              mail: document.data()['mail'] as String,
-              address: document.data()['address'] as String,
-              description: document.data()['description'] as String,
-            ),
-          );
-        }
+    FirebaseFirestore.instance
+        .collection('contactList')
+        .orderBy('lastname')
+        .snapshots()
+        .listen((snapshot) {
+      _cache.clear();
+      for (final document in snapshot.docs) {
+        _cache.add(
+          Contact(
+            name: document.data()['name'] as String,
+            lastname: document.data()['lastname'] as String,
+            mobile: document.data()['mobile'] as String,
+            mail: document.data()['mail'] as String,
+            address: document.data()['address'] as String,
+            description: document.data()['description'] as String,
+          ),
+        );
+      }
 
-        _loadedContactList.add(_cache);
-      });
-    }
+      _loadedContactList.add(_cache);
+    });
   }
 
   @override

@@ -13,16 +13,16 @@ class ContactListRepositoryMemory extends ContactListRepository {
   @override
   void refresh() {
     _constactList.add(
-      []..add(
-          const Contact(
-            name: 'Marcus',
-            lastname: 'Smart',
-            mobile: '25436785675',
-            mail: 'smart13@gmail.com',
-            address: 'Boston',
-            description: '',
-          ),
+      [
+        const Contact(
+          name: 'Marcus',
+          lastname: 'Smart',
+          mobile: '25436785675',
+          mail: 'smart13@gmail.com',
+          address: 'Boston',
+          description: '',
         ),
+      ],
     );
   }
 
