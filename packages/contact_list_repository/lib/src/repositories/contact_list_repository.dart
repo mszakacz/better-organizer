@@ -8,7 +8,7 @@ abstract class ContactListRepository {
 }
 
 class ContactListRepositoryMemory extends ContactListRepository {
-  StreamController<List<Contact>> _constactList = StreamController();
+  final StreamController<List<Contact>> _constactList = StreamController();
 
   @override
   void refresh() {
