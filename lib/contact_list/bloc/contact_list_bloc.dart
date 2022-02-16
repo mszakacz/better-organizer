@@ -14,7 +14,7 @@ class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
           searchingWord: '',
         )) {
     repository
-        .constactList()
+        .contactList()
         .listen((contacts) => add(GetContactListEvent(contacts)));
     on<GetContactListEvent>(_onGetContactListEvent);
     on<SearchEvent>(_onSearchEvent);
