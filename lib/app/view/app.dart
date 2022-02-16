@@ -1,4 +1,5 @@
 import 'package:better_organizer/app/app.dart';
+import 'package:better_organizer/contact_list/bloc/contact_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:better_organizer/app/router/router.dart';
 import 'package:better_organizer/contact_list/view/contact_list_page.dart';
@@ -16,19 +17,26 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) =>
-              NewContactBloc(contactRepository: ContactRepository()),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Better Organizer',
-        home: const MainPage(
+    return RepositoryProvider<ContactListRepository>(
+      create: (context) => ContactListRepositoryFireStore()..refresh(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                NewContactBloc(contactRepository: ContactRepository()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                ContactListBloc(repository: RepositoryProvider.of(context)),
+          )
+        ],
+        child: MaterialApp(
           title: 'Better Organizer',
+          home: const MainPage(
+            title: 'Better Organizer',
+          ),
+          onGenerateRoute: _appRouter.onGenerateRoute,
         ),
-        onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );
   }
