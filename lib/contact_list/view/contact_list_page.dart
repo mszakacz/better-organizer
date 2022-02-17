@@ -71,20 +71,7 @@ class _ContactListPageState extends State<ContactListPage> {
       body: const ContactListWidget(),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () async {
-            final result =
-                await Navigator.of(context).push(NewContactPage.route());
-
-            if (result != null) {
-              ScaffoldMessenger.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    content: Text('$result'),
-                  ),
-                );
-            }
-          },
+          onPressed: () => Navigator.of(context).push(NewContactPage.route()),
           backgroundColor: Colors.blue),
     );
   }
