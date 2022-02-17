@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NewContactPage extends StatefulWidget {
   const NewContactPage({Key? key}) : super(key: key);
 
-  static Route<void> route() {
+  static Route<String> route() {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
         create: (context) => NewContactBloc(
