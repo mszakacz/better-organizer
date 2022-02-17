@@ -21,10 +21,15 @@ class ViewContactPage extends StatelessWidget {
       listener: (context, state) => {
         if (state.status == ViewContactStatus.deleted)
           {
-            Navigator.pop(context,
-                'Contact (${state.contact.name} ${state.contact.lastname}) has been deleted.'),
-            print(
-                'Contact (${state.contact.name} ${state.contact.lastname}) has been deleted.'),
+            ScaffoldMessenger.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(
+                      'Contact ${state.contact.name} ${state.contact.lastname} has been deleted.'),
+                ),
+              ),
+            Navigator.pop(context),
           }
       },
       child: Scaffold(
