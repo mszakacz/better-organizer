@@ -35,11 +35,6 @@ class _AppState extends State<App> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => NewContactBloc(
-                contactRepository:
-                    RepositoryProvider.of<ContactRepository>(context)),
-          ),
-          BlocProvider(
             create: (context) => ContactListBloc(
                 contactListRepository:
                     RepositoryProvider.of<ContactListRepository>(context)),

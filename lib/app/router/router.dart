@@ -19,9 +19,6 @@ class AppRouter {
 
       case 'view_contact':
         return MaterialPageRoute(builder: (_) => const ViewContactPage());
-
-      case 'new_contact':
-        return MaterialPageRoute(builder: (_) => const NewContactPage());
     }
   }
 }

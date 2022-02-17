@@ -1,3 +1,4 @@
+import 'package:contact_list_repository/contact_list_repository.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 import '../bloc/new_contact_bloc.dart';
@@ -5,6 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewContactPage extends StatefulWidget {
   const NewContactPage({Key? key}) : super(key: key);
+
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => BlocProvider(
+        create: (context) => NewContactBloc(
+          contactRepository: context.read<ContactRepository>(),
+        ),
+        child: const NewContactPage(),
+      ),
+    );
+  }
 
   @override
   State<NewContactPage> createState() => _NewContactPageState();

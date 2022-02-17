@@ -1,3 +1,4 @@
+import 'package:better_organizer/new_contact/new_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +72,9 @@ class _ContactListPageState extends State<ContactListPage> {
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () async {
-            final result = await Navigator.of(context).pushNamed('new_contact');
+            final result =
+                await Navigator.of(context).push(NewContactPage.route());
+
             if (result != null) {
               ScaffoldMessenger.of(context)
                 ..removeCurrentSnackBar()
