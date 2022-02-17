@@ -8,13 +8,7 @@ class ViewContactPage extends StatelessWidget {
 
   static Route<void> route() {
     return MaterialPageRoute(
-      fullscreenDialog: true,
-      builder: (context) => BlocProvider(
-        create: (context) => ViewContactBloc(
-          contactRepository: context.read<ContactRepository>(),
-        ),
-        child: const ViewContactPage(),
-      ),
+      builder: (context) => const ViewContactPage(),
     );
   }
 

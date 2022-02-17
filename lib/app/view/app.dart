@@ -1,8 +1,5 @@
-import 'package:better_organizer/app/app.dart';
 import 'package:flutter/material.dart';
-import 'package:better_organizer/app/router/router.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
-import 'package:better_organizer/new_contact/new_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
@@ -21,8 +18,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final AppRouter _appRouter = AppRouter();
-
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -45,12 +40,11 @@ class _AppState extends State<App> {
                     RepositoryProvider.of<ContactRepository>(context)),
           ),
         ],
-        child: MaterialApp(
+        child: const MaterialApp(
           title: 'Better Organizer',
-          home: const MainPage(
+          home: MainPage(
             title: 'Better Organizer',
           ),
-          onGenerateRoute: _appRouter.onGenerateRoute,
         ),
       ),
     );
