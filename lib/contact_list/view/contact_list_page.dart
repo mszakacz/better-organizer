@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/contact_list_bloc.dart';
 
-class ContactListPage extends StatelessWidget {
+class ContactListPage extends StatefulWidget {
   const ContactListPage({Key? key}) : super(key: key);
+
+  @override
+  State<ContactListPage> createState() => _ContactListPageState();
+}
+
+class _ContactListPageState extends State<ContactListPage> {
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +32,26 @@ class ContactListPage extends StatelessWidget {
               color: Colors.white, borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: TextField(
+                controller: _textController,
                 onChanged: (value) => BlocProvider.of<ContactListBloc>(context)
                     .add(SearchEvent(searchingWord: value)),
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.grey[200],
-                  prefixIcon: BlocBuilder<ContactListBloc, ContactListState>(
-                    builder: (context, state) {
-                      return IconButton(
-                        icon: const Icon(Icons.search),
-                        onPressed: () {},
-                      );
-                    },
+                  prefixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {},
                   ),
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.clear),
-                    onPressed: () {},
+                    onPressed: () => {
+                      _textController.clear(),
+                      BlocProvider.of<ContactListBloc>(context).add(
+                        const SearchEvent(
+                          searchingWord: '',
+                        ),
+                      ),
+                    },
                   ),
                   contentPadding: const EdgeInsets.all(10.0),
                   hintText: 'Search...',

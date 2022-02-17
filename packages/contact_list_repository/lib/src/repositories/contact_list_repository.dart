@@ -1,36 +1,53 @@
 import 'dart:async';
 import '../models/models.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class ContactListRepository {
-  Stream<List<Contact>> constactList();
+  Stream<List<Contact>> contactList();
   void dispose();
   void refresh();
 }
 
-class ContactListRepositoryMemory extends ContactListRepository {
-  final StreamController<List<Contact>> _constactList = StreamController();
+class ContactListRepositoryFireStore extends ContactListRepository {
+  ContactListRepositoryFireStore({required this.firebaseFirestore});
+  final FirebaseFirestore firebaseFirestore;
 
-  @override
-  void refresh() {
-    _constactList.add(
-      []..add(
-          const Contact(
-            name: 'Marcus',
-            lastname: 'Smart',
-            mobile: '25436785675',
-            mail: 'smart13@gmail.com',
-            address: 'Boston',
-            description: '',
-          ),
-        ),
-    );
-  }
+  final StreamController<List<Contact>> _loadedContactList =
+      StreamController<List<Contact>>();
+
+  final List<Contact> _cache = [];
 
   @override
   void dispose() {
-    _constactList.close();
+    _loadedContactList.close();
   }
 
   @override
-  Stream<List<Contact>> constactList() => _constactList.stream;
+  void refresh() {
+    firebaseFirestore
+        .collection('contactList')
+        .orderBy('lastname')
+        .snapshots()
+        .listen((snapshot) {
+      _cache.clear();
+      for (final document in snapshot.docs) {
+        _cache.add(
+          Contact(
+            id: document.id,
+            name: document.data()['name'] as String,
+            lastname: document.data()['lastname'] as String,
+            mobile: document.data()['mobile'] as String,
+            mail: document.data()['mail'] as String,
+            address: document.data()['address'] as String,
+            description: document.data()['description'] as String,
+          ),
+        );
+      }
+
+      _loadedContactList.add(_cache);
+    });
+  }
+
+  @override
+  Stream<List<Contact>> contactList() => _loadedContactList.stream;
 }
