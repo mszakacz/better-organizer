@@ -16,9 +16,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const ContactListPage(),
         );
-
-      case 'view_contact':
-        return MaterialPageRoute(builder: (_) => const ViewContactPage());
     }
   }
 }

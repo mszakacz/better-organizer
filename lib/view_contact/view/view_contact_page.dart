@@ -1,9 +1,22 @@
+import 'package:contact_list_repository/contact_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewContactPage extends StatelessWidget {
   const ViewContactPage({Key? key}) : super(key: key);
+
+  static Route<void> route() {
+    return MaterialPageRoute(
+      fullscreenDialog: true,
+      builder: (context) => BlocProvider(
+        create: (context) => ViewContactBloc(
+          contactRepository: context.read<ContactRepository>(),
+        ),
+        child: const ViewContactPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

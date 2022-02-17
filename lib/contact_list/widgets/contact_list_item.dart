@@ -20,9 +20,7 @@ class ContactListItem extends StatelessWidget {
           ),
           onTap: () {
             context.read<ViewContactBloc>().add(GetContact(contact: contact));
-            Navigator.of(context).pushNamed(
-              'view_contact',
-            );
+            Navigator.of(context).push(ViewContactPage.route());
           }),
     );
   }
