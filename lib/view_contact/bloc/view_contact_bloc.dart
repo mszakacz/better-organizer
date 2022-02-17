@@ -14,6 +14,7 @@ class ViewContactBloc extends Bloc<ViewContactEvent, ViewContactState> {
           ),
         ) {
     on<DeleteContactEvent>(_onDeleteContactEvent);
+    on<GetContact>(_onGetContact);
   }
   final ContactRepository contactRepository;
 
@@ -22,10 +23,15 @@ class ViewContactBloc extends Bloc<ViewContactEvent, ViewContactState> {
     emit(state.copyWith(status: ViewContactStatus.loading));
     try {
       contactRepository.deleteContact(state.contact.id);
-      print('id: ${state.contact.id}');
       emit(state.copyWith(status: ViewContactStatus.deleted));
     } catch (e) {
       emit(state.copyWith(status: ViewContactStatus.failure));
     }
+  }
+
+  void _onGetContact(GetContact event, Emitter<ViewContactState> emit) {
+    emit(state.copyWith(status: ViewContactStatus.loading));
+    emit(state.copyWith(
+        status: ViewContactStatus.success, contact: event.contact));
   }
 }

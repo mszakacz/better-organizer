@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/contact_list_bloc.dart';
 
 class ContactListPage extends StatefulWidget {
   const ContactListPage({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'contact_list_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/contact_list_bloc.dart';
+import 'package:better_organizer/contact_list/contact_list.dart';
 
 class ContactListWidget extends StatelessWidget {
   const ContactListWidget({Key? key}) : super(key: key);

@@ -11,8 +11,8 @@ class DeleteContactEvent extends ViewContactEvent {}
 
 class RefreshContactData extends ViewContactEvent {}
 
-class GetUser extends ViewContactEvent {
-  const GetUser({required this.contact});
+class GetContact extends ViewContactEvent {
+  const GetContact({required this.contact});
   final Contact contact;
 
   @override

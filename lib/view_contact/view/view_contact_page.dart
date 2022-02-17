@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ViewContactPage extends StatelessWidget {
-  final Contact contact;
-  const ViewContactPage({Key? key, required this.contact}) : super(key: key);
+  const ViewContactPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +15,18 @@ class ViewContactPage extends StatelessWidget {
         if (state.status == ViewContactStatus.deleted)
           {
             Navigator.pop(context,
-                'Contact (${contact.name} ${contact.lastname}) has been deleted.'),
+                'Contact (${state.contact.name} ${state.contact.lastname}) has been deleted.'),
             print(
-                'Contact (${contact.name} ${contact.lastname}) has been deleted.'),
+                'Contact (${state.contact.name} ${state.contact.lastname}) has been deleted.'),
           }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('${contact.name} ${contact.lastname} id: ${contact.id}'),
+          title: BlocBuilder<ViewContactBloc, ViewContactState>(
+            builder: (context, state) {
+              return Text('${state.contact.name} ${state.contact.lastname}');
+            },
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(
@@ -35,7 +37,11 @@ class ViewContactPage extends StatelessWidget {
             ),
           ],
         ),
-        body: ContactInformations(contact: contact),
+        body: BlocBuilder<ViewContactBloc, ViewContactState>(
+          builder: (context, state) {
+            return ContactInformations(contact: state.contact);
+          },
+        ),
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -53,8 +59,8 @@ class ViewContactPage extends StatelessWidget {
                 heroTag: null,
                 key: const Key('viewContactPage_deleteContactButton'),
                 child: const Icon(Icons.delete),
-                onPressed: () => BlocProvider.of<ViewContactBloc>(context)
-                    .add(DeleteContactEvent()),
+                onPressed: () =>
+                    context.read<ViewContactBloc>().add(DeleteContactEvent()),
                 foregroundColor: Colors.red,
                 backgroundColor: Colors.grey[800],
               ),

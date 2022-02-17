@@ -17,11 +17,6 @@ class ContactRepository {
   }
 
   Future<void> deleteContact(String id) async {
-    try {
-      print('Contact has been deleted');
-      return await firebaseFirestore.collection('contactList').doc(id).delete();
-    } catch (e) {
-      print(e);
-    }
+    return await firebaseFirestore.collection('contactList').doc(id).delete();
   }
 }
