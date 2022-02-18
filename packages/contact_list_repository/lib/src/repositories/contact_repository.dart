@@ -5,7 +5,7 @@ class ContactRepository {
   const ContactRepository({required this.firebaseFirestore});
   final FirebaseFirestore firebaseFirestore;
 
-  Future<DocumentReference> addNewContact(Contact contact) {
+  Future<void> addNewContact(Contact contact) {
     return firebaseFirestore.collection('contactList').add(<String, dynamic>{
       'name': contact.name,
       'lastname': contact.lastname,
