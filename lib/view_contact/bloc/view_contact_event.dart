@@ -7,9 +7,19 @@ abstract class ViewContactEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class DeleteContactEvent extends ViewContactEvent {}
+class DeleteContactEvent extends ViewContactEvent {
+  const DeleteContactEvent();
 
-class RefreshContactData extends ViewContactEvent {}
+  @override
+  List<Object> get props => [];
+}
+
+class RefreshContactData extends ViewContactEvent {
+  const RefreshContactData();
+
+  @override
+  List<Object> get props => [];
+}
 
 class GetContact extends ViewContactEvent {
   const GetContact({required this.contact});
