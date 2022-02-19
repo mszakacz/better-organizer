@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 class EditContactPage extends StatelessWidget {
   const EditContactPage({Key? key}) : super(key: key);
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => const EditContactPage(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

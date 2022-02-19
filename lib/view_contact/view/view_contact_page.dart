@@ -1,7 +1,7 @@
-import 'package:contact_list_repository/contact_list_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:better_organizer/edit_contact/edit_contact.dart';
 
 class ViewContactPage extends StatelessWidget {
   const ViewContactPage({Key? key}) : super(key: key);
@@ -62,7 +62,8 @@ class ViewContactPage extends StatelessWidget {
               child: FloatingActionButton(
                 key: const Key('viewContactPage_editContactButton'),
                 child: const Icon(Icons.edit),
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.of(context).push(EditContactPage.route()),
               ),
             ),
             Padding(
