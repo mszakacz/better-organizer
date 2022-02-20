@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:better_organizer/edit_contact/edit_contact.dart';
+import 'package:better_organizer/edit_contact/view/view.dart';
 
 class ViewContactPage extends StatelessWidget {
   const ViewContactPage({Key? key}) : super(key: key);
@@ -65,7 +65,12 @@ class ViewContactPage extends StatelessWidget {
                     key: const Key('viewContactPage_editContactButton'),
                     child: const Icon(Icons.edit),
                     onPressed: () => Navigator.of(context)
-                        .push(EditContactPage.route(state.contact)),
+                        .push(EditContactPage.route(state.contact))
+                        .whenComplete(
+                          () => context
+                              .read<ViewContactBloc>()
+                              .add(GetContact(id: state.contact.id)),
+                        ),
                   ),
                 );
               },
