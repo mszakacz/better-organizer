@@ -31,7 +31,12 @@ class ViewContactBloc extends Bloc<ViewContactEvent, ViewContactState> {
 
   void _onGetContact(GetContact event, Emitter<ViewContactState> emit) async {
     emit(state.copyWith(status: ViewContactStatus.loading));
-    final contact = await contactRepository.getContact(event.id);
-    emit(state.copyWith(status: ViewContactStatus.success, contact: contact));
+
+    try {
+      final contact = await contactRepository.getContact(event.id);
+      emit(state.copyWith(status: ViewContactStatus.success, contact: contact));
+    } catch (e) {
+      emit(state.copyWith(status: ViewContactStatus.failure));
+    }
   }
 }
