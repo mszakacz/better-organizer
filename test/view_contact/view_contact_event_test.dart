@@ -51,17 +51,17 @@ void main() {
     group('GetContact', () {
       test('supports value equality', () {
         expect(
-          GetContact(contact: contact),
+          GetContact(id: contact.id),
           equals(
-            GetContact(contact: contact),
+            GetContact(id: contact.id),
           ),
         );
       });
 
       test('props are correct', () {
         expect(
-          GetContact(contact: contact).props,
-          equals(<Object?>[contact]),
+          GetContact(id: contact.id).props,
+          equals(<Object?>[contact.id]),
         );
       });
     });
