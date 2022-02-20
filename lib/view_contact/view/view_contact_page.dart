@@ -57,14 +57,18 @@ class ViewContactPage extends StatelessWidget {
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FloatingActionButton(
-                key: const Key('viewContactPage_editContactButton'),
-                child: const Icon(Icons.edit),
-                onPressed: () =>
-                    Navigator.of(context).push(EditContactPage.route()),
-              ),
+            BlocBuilder<ViewContactBloc, ViewContactState>(
+              builder: (context, state) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FloatingActionButton(
+                    key: const Key('viewContactPage_editContactButton'),
+                    child: const Icon(Icons.edit),
+                    onPressed: () => Navigator.of(context)
+                        .push(EditContactPage.route(state.contact)),
+                  ),
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
