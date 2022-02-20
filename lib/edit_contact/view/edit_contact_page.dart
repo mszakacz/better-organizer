@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
-import '../bloc/edit_contact_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:better_organizer/edit_contact/edit_contact.dart';
 
@@ -24,17 +21,8 @@ class EditContactPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('${contact.name} ${contact.lastname}'),
         ),
-        body: const EditContactBody(),
+        body: EditContactForm(contact: contact),
       ),
     );
-  }
-}
-
-class EditContactBody extends StatelessWidget {
-  const EditContactBody({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
