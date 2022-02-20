@@ -107,6 +107,12 @@ class EditContactForm extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 40),
+              ElevatedButton(
+                child: const Text('Save changes'),
+                onPressed: () => BlocProvider.of<EditContactBloc>(context)
+                    .add(const SaveChanges()),
+              ),
             ],
           );
         },

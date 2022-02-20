@@ -7,12 +7,13 @@ part 'edit_contact_event.dart';
 part 'edit_contact_state.dart';
 
 class EditContactBloc extends Bloc<EditContactEvent, EditContactState> {
-  EditContactBloc()
+  EditContactBloc({required this.contactRepository})
       : super(const EditContactState(
           status: EditContactStatus.editing,
           contact: Contact(),
         )) {
     on<GetContact>(_onGetContact);
+    on<SaveChanges>(_onSaveChanges);
     on<NameEditing>(_onNameEditing);
     on<LastnameEditing>(_onLastnameEditing);
     on<MobileEditing>(_onMobileEditing);
@@ -21,11 +22,24 @@ class EditContactBloc extends Bloc<EditContactEvent, EditContactState> {
     on<DesctriptionEditing>(_onDescriptionEditing);
   }
 
+  final ContactRepository contactRepository;
+
   void _onGetContact(GetContact event, Emitter<EditContactState> emit) {
     emit(state.copyWith(
       status: EditContactStatus.editing,
       contact: event.contact,
     ));
+  }
+
+  Future<void> _onSaveChanges(
+      SaveChanges event, Emitter<EditContactState> emit) async {
+    emit(state.copyWith(status: EditContactStatus.posting));
+    try {
+      await contactRepository.editContact(state.contact);
+      emit(state.copyWith(status: EditContactStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: EditContactStatus.failure));
+    }
   }
 
   void _onNameEditing(NameEditing event, Emitter<EditContactState> emit) {
