@@ -16,6 +16,17 @@ class ContactRepository {
     });
   }
 
+  Future<void> editContact(Contact contact) {
+    return firebaseFirestore.collection('contactList').doc(contact.id).update({
+      'name': contact.name,
+      'lastname': contact.lastname,
+      'mobile': contact.mobile,
+      'mail': contact.mail,
+      'address': contact.address,
+      'description': contact.description,
+    });
+  }
+
   Future<void> deleteContact(String id) async {
     return await firebaseFirestore.collection('contactList').doc(id).delete();
   }
