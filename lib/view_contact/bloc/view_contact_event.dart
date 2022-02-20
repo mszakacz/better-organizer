@@ -22,9 +22,9 @@ class RefreshContactData extends ViewContactEvent {
 }
 
 class GetContact extends ViewContactEvent {
-  const GetContact({required this.contact});
-  final Contact contact;
+  const GetContact({required this.id});
+  final String id;
 
   @override
-  List<Object> get props => [contact];
+  List<Object> get props => [id];
 }

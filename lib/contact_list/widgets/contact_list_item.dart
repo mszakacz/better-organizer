@@ -19,7 +19,7 @@ class ContactListItem extends StatelessWidget {
             '${contact.name} ${contact.lastname}',
           ),
           onTap: () {
-            context.read<ViewContactBloc>().add(GetContact(contact: contact));
+            context.read<ViewContactBloc>().add(GetContact(id: contact.id));
             Navigator.of(context).push(ViewContactPage.route());
           }),
     );

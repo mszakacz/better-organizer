@@ -107,17 +107,56 @@ void main() {
     });
 
     group('GetContact', () {
+      final editedContact = mockContact.copyWith(name: 'editedName');
+
       blocTest<ViewContactBloc, ViewContactState>(
-        'emits new state with updated contact',
+        'emits new state with updated contact when successful',
+        setUp: () {
+          when(() => contactRepository.getContact(any()))
+              .thenAnswer((_) async => editedContact);
+        },
         build: buildBloc,
-        act: (bloc) => bloc.add(GetContact(contact: mockContact)),
+        seed: () => ViewContactState(
+          contact: mockContact,
+          status: ViewContactStatus.success,
+        ),
+        act: (bloc) => bloc.add(GetContact(id: mockContact.id)),
         expect: () => [
-          const ViewContactState(
+          ViewContactState(
             status: ViewContactStatus.loading,
-            contact: Contact(),
+            contact: mockContact,
           ),
           ViewContactState(
             status: ViewContactStatus.success,
+            contact: editedContact,
+          ),
+        ],
+        verify: (bloc) {
+          verify(
+            () => contactRepository.getContact(any(that: isA<String>())),
+          );
+        },
+      );
+
+      blocTest<ViewContactBloc, ViewContactState>(
+        'emits new state with error if getContact fails',
+        build: () {
+          when(() => contactRepository.getContact(any()))
+              .thenThrow(Exception('oops'));
+          return buildBloc();
+        },
+        seed: () => ViewContactState(
+          contact: mockContact,
+          status: ViewContactStatus.success,
+        ),
+        act: (bloc) => bloc.add(GetContact(id: mockContact.id)),
+        expect: () => [
+          ViewContactState(
+            status: ViewContactStatus.loading,
+            contact: mockContact,
+          ),
+          ViewContactState(
+            status: ViewContactStatus.failure,
             contact: mockContact,
           ),
         ],
