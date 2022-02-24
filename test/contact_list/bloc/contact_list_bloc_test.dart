@@ -4,7 +4,7 @@ import 'package:better_organizer/contact_list/contact_list.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:contact_list_repository/contact_list_repository.dart';
 
-class MockContactListRepository extends Mock implements ContactListRepository {}
+class MockContactListRepository extends Mock implements ContactsRepository {}
 
 class FakeContact extends Fake implements Contact {}
 
@@ -40,22 +40,22 @@ void main() {
       ),
     ];
 
-    late ContactListRepository contactListRepository;
+    late ContactsRepository contactsRepository;
 
     setUpAll(() {
       registerFallbackValue(<FakeContact>[]);
     });
 
     ContactListBloc buildBloc() {
-      return ContactListBloc(contactListRepository: contactListRepository)
+      return ContactListBloc(contactsRepository: contactsRepository)
         ..add(const GetContactListEvent(contactList: mockContactsList));
     }
 
     group('constructor', () {
       setUp(() {
-        contactListRepository = MockContactListRepository();
+        contactsRepository = MockContactListRepository();
 
-        when(() => contactListRepository.contactList())
+        when(() => contactsRepository.contactList())
             .thenAnswer((contacts) => const Stream.empty());
       });
 
@@ -95,9 +95,12 @@ void main() {
 
     group('SearchEvent', () {
       setUp(() {
-        contactListRepository = MockContactListRepository();
-        when(() => contactListRepository.contactList())
-            .thenAnswer((contacts) => const Stream.empty());
+        contactsRepository = MockContactListRepository();
+        when(
+          () => contactsRepository.contactList(),
+        ).thenAnswer(
+          (contacts) => const Stream.empty(),
+        );
       });
 
       blocTest<ContactListBloc, ContactListState>(

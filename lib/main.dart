@@ -13,15 +13,10 @@ void main() async {
 
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  final ContactListRepository _contactListRepository =
-      ContactListRepositoryFireStore(firebaseFirestore: firebaseFirestore)
-        ..refresh();
-
-  final ContactRepository _contactRepository =
-      ContactRepository(firebaseFirestore: firebaseFirestore);
+  final ContactsRepository _contactsRepository =
+      ContactsRepository(firebaseFirestore: firebaseFirestore)..refresh();
 
   runApp(App(
-    contactListRepository: _contactListRepository,
-    contactRepository: _contactRepository,
+    contactsRepository: _contactsRepository,
   ));
 }

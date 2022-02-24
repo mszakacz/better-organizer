@@ -11,7 +11,7 @@ class NewContactPage extends StatefulWidget {
     return MaterialPageRoute(
       builder: (context) => BlocProvider(
         create: (context) => NewContactBloc(
-          contactRepository: context.read<ContactRepository>(),
+          contactsRepository: context.read<ContactsRepository>(),
         ),
         child: const NewContactPage(),
       ),

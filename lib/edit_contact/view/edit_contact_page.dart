@@ -17,7 +17,8 @@ class EditContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<EditContactBloc>(
       create: (context) => EditContactBloc(
-          contactRepository: RepositoryProvider.of<ContactRepository>(context))
+          contactsRepository:
+              RepositoryProvider.of<ContactsRepository>(context))
         ..add(GetContact(contact: contact)),
       child: Scaffold(
         appBar: AppBar(
