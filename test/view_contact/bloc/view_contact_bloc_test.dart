@@ -2,9 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 
-class MockContactRepository extends Mock implements ContactRepository {}
+class MockContactRepository extends Mock implements ContactsRepository {}
 
 class FakeContact extends Fake implements Contact {}
 
@@ -20,25 +20,35 @@ void main() {
   );
 
   group('ViewContactBloc', () {
-    late ContactRepository contactRepository;
+    late ContactsRepository contactsRepository;
 
     setUpAll(() {
-      registerFallbackValue(FakeContact());
+      registerFallbackValue(
+        FakeContact(),
+      );
     });
 
     setUp(() {
-      contactRepository = MockContactRepository();
+      contactsRepository = MockContactRepository();
 
-      when(() => contactRepository.deleteContact(any()))
-          .thenAnswer((_) async {});
+      when(
+        () => contactsRepository.deleteContact(
+          any(),
+        ),
+      ).thenAnswer(
+        (_) async {},
+      );
     });
 
     ViewContactBloc buildBloc() {
-      return ViewContactBloc(contactRepository: contactRepository);
+      return ViewContactBloc(contactsRepository: contactsRepository);
     }
 
     group('constructor', () {
-      test('works properly', () => expect(buildBloc, returnsNormally));
+      test(
+        'works properly',
+        () => expect(buildBloc, returnsNormally),
+      );
 
       test('has correct initial state', () {
         expect(
@@ -55,15 +65,22 @@ void main() {
       blocTest<ViewContactBloc, ViewContactState>(
         'attempts to delete contact with repository',
         setUp: () {
-          when(() => contactRepository.deleteContact(any()))
-              .thenAnswer((_) async {});
+          when(
+            () => contactsRepository.deleteContact(
+              any(),
+            ),
+          ).thenAnswer(
+            (_) async {},
+          );
         },
         build: buildBloc,
         seed: () => ViewContactState(
           contact: mockContact,
           status: ViewContactStatus.success,
         ),
-        act: (bloc) => bloc.add(const DeleteContactEvent()),
+        act: (bloc) => bloc.add(
+          const DeleteContactEvent(),
+        ),
         expect: () => [
           ViewContactState(
             status: ViewContactStatus.loading,
@@ -76,7 +93,11 @@ void main() {
         ],
         verify: (bloc) {
           verify(
-            () => contactRepository.deleteContact(any(that: isA<String>())),
+            () => contactsRepository.deleteContact(
+              any(
+                that: isA<String>(),
+              ),
+            ),
           );
         },
       );
@@ -84,15 +105,20 @@ void main() {
       blocTest<ViewContactBloc, ViewContactState>(
         'emits new state with error if deletion fails',
         build: () {
-          when(() => contactRepository.deleteContact(any()))
-              .thenThrow(Exception('oops'));
+          when(
+            () => contactsRepository.deleteContact(
+              any(),
+            ),
+          ).thenThrow(Exception('oops'));
           return buildBloc();
         },
         seed: () => ViewContactState(
           contact: mockContact,
           status: ViewContactStatus.success,
         ),
-        act: (bloc) => bloc.add(const DeleteContactEvent()),
+        act: (bloc) => bloc.add(
+          const DeleteContactEvent(),
+        ),
         expect: () => [
           ViewContactState(
             status: ViewContactStatus.loading,
@@ -112,7 +138,7 @@ void main() {
       blocTest<ViewContactBloc, ViewContactState>(
         'emits new state with updated contact when successful',
         setUp: () {
-          when(() => contactRepository.getContact(any()))
+          when(() => contactsRepository.getContact(any()))
               .thenAnswer((_) async => editedContact);
         },
         build: buildBloc,
@@ -120,7 +146,9 @@ void main() {
           contact: mockContact,
           status: ViewContactStatus.success,
         ),
-        act: (bloc) => bloc.add(GetContact(id: mockContact.id)),
+        act: (bloc) => bloc.add(
+          GetContact(id: mockContact.id),
+        ),
         expect: () => [
           ViewContactState(
             status: ViewContactStatus.loading,
@@ -133,7 +161,11 @@ void main() {
         ],
         verify: (bloc) {
           verify(
-            () => contactRepository.getContact(any(that: isA<String>())),
+            () => contactsRepository.getContact(
+              any(
+                that: isA<String>(),
+              ),
+            ),
           );
         },
       );
@@ -141,15 +173,20 @@ void main() {
       blocTest<ViewContactBloc, ViewContactState>(
         'emits new state with error if getContact fails',
         build: () {
-          when(() => contactRepository.getContact(any()))
-              .thenThrow(Exception('oops'));
+          when(
+            () => contactsRepository.getContact(
+              any(),
+            ),
+          ).thenThrow(Exception('oops'));
           return buildBloc();
         },
         seed: () => ViewContactState(
           contact: mockContact,
           status: ViewContactStatus.success,
         ),
-        act: (bloc) => bloc.add(GetContact(id: mockContact.id)),
+        act: (bloc) => bloc.add(
+          GetContact(id: mockContact.id),
+        ),
         expect: () => [
           ViewContactState(
             status: ViewContactStatus.loading,

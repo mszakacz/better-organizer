@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:better_organizer/edit_contact/edit_contact.dart';
 
@@ -17,7 +17,8 @@ class EditContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<EditContactBloc>(
       create: (context) => EditContactBloc(
-          contactRepository: RepositoryProvider.of<ContactRepository>(context))
+          contactsRepository:
+              RepositoryProvider.of<ContactsRepository>(context))
         ..add(GetContact(contact: contact)),
       child: Scaffold(
         appBar: AppBar(

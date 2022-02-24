@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 
 class App extends StatefulWidget {
   const App({
     Key? key,
-    required this.contactListRepository,
-    required this.contactRepository,
+    required this.contactsRepository,
   }) : super(key: key);
-  final ContactListRepository contactListRepository;
-  final ContactRepository contactRepository;
+
+  final ContactsRepository contactsRepository;
 
   @override
   State<App> createState() => _AppState();
@@ -22,22 +21,20 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<ContactListRepository>.value(
-            value: widget.contactListRepository),
-        RepositoryProvider<ContactRepository>.value(
-            value: widget.contactRepository),
+        RepositoryProvider<ContactsRepository>.value(
+            value: widget.contactsRepository),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => ContactListBloc(
-                contactListRepository:
-                    RepositoryProvider.of<ContactListRepository>(context)),
+                contactsRepository:
+                    RepositoryProvider.of<ContactsRepository>(context)),
           ),
           BlocProvider(
             create: (context) => ViewContactBloc(
-                contactRepository:
-                    RepositoryProvider.of<ContactRepository>(context)),
+                contactsRepository:
+                    RepositoryProvider.of<ContactsRepository>(context)),
           ),
         ],
         child: const MaterialApp(

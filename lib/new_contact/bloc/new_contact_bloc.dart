@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 
 part 'new_contact_event.dart';
 part 'new_contact_state.dart';
 
 class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
-  NewContactBloc({required this.contactRepository})
+  NewContactBloc({required this.contactsRepository})
       : super(const NewContactState(
             contact: Contact(), status: NewContactStatus.open)) {
     on<NameEditing>(_onNameEditing);
@@ -18,7 +18,7 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
     on<AddContact>(_onAddContact);
   }
 
-  final ContactRepository contactRepository;
+  final ContactsRepository contactsRepository;
 
   void _onNameEditing(NameEditing event, Emitter<NewContactState> emit) {
     emit(state.copyWith(contact: state.contact.copyWith(name: event.name)));
@@ -53,7 +53,7 @@ class NewContactBloc extends Bloc<NewContactEvent, NewContactState> {
       AddContact event, Emitter<NewContactState> emit) async {
     emit(state.copyWith(status: NewContactStatus.posting));
     try {
-      await contactRepository.addNewContact(state.contact);
+      await contactsRepository.addNewContact(state.contact);
       emit(state.copyWith(status: NewContactStatus.success));
       emit(state.copyWith(
         contact: const Contact(),

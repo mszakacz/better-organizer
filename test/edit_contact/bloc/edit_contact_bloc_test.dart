@@ -2,9 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:better_organizer/edit_contact/edit_contact.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 
-class MockContactRepository extends Mock implements ContactRepository {}
+class MockContactRepository extends Mock implements ContactsRepository {}
 
 class FakeContact extends Fake implements Contact {}
 
@@ -30,32 +30,43 @@ void main() {
   );
 
   group('EditContactBloc', () {
-    late ContactRepository contactRepository;
+    late ContactsRepository contactsRepository;
 
     setUpAll(() {
-      registerFallbackValue(FakeContact());
+      registerFallbackValue(
+        FakeContact(),
+      );
     });
 
     setUp(() {
-      contactRepository = MockContactRepository();
+      contactsRepository = MockContactRepository();
 
-      when(() => contactRepository.editContact(any())).thenAnswer((_) async {});
+      when(
+        () => contactsRepository.editContact(
+          any(),
+        ),
+      ).thenAnswer((_) async {});
     });
 
     EditContactBloc buildBloc() {
-      return EditContactBloc(contactRepository: contactRepository);
+      return EditContactBloc(contactsRepository: contactsRepository);
     }
 
     group('constructor', () {
-      test('works properly', () => expect(buildBloc, returnsNormally));
+      test(
+        'works properly',
+        () => expect(buildBloc, returnsNormally),
+      );
 
       test('has correct initial state', () {
         expect(
           buildBloc().state,
-          equals(const EditContactState(
-            contact: Contact(),
-            status: EditContactStatus.editing,
-          )),
+          equals(
+            const EditContactState(
+              contact: Contact(),
+              status: EditContactStatus.editing,
+            ),
+          ),
         );
       });
     });
@@ -80,7 +91,7 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'attempts to save contact to repository',
         setUp: () {
-          when(() => contactRepository.editContact(any()))
+          when(() => contactsRepository.editContact(any()))
               .thenAnswer((_) async {});
         },
         build: buildBloc,
@@ -101,18 +112,21 @@ void main() {
         ],
         verify: (bloc) {
           verify(
-            () => contactRepository.editContact(
+            () => contactsRepository.editContact(
               any(
-                  that: isA<Contact>()
-                      .having((c) => c.id, '1', equals('1'))
-                      .having((c) => c.name, 'name1', equals('name1'))
-                      .having(
-                          (c) => c.lastname, 'lastname1', equals('lastname1'))
-                      .having((c) => c.mobile, 'mobile1', equals('mobile1'))
-                      .having((c) => c.mail, 'mail1', equals('mail1'))
-                      .having((c) => c.address, 'address1', equals('address1'))
-                      .having((c) => c.description, 'description1',
-                          equals('description1'))),
+                that: isA<Contact>()
+                    .having((c) => c.id, '1', equals('1'))
+                    .having((c) => c.name, 'name1', equals('name1'))
+                    .having((c) => c.lastname, 'lastname1', equals('lastname1'))
+                    .having((c) => c.mobile, 'mobile1', equals('mobile1'))
+                    .having((c) => c.mail, 'mail1', equals('mail1'))
+                    .having((c) => c.address, 'address1', equals('address1'))
+                    .having(
+                      (c) => c.description,
+                      'description1',
+                      equals('description1'),
+                    ),
+              ),
             ),
           );
         },
@@ -121,15 +135,20 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with error if save to repository fails',
         build: () {
-          when(() => contactRepository.editContact(any()))
-              .thenThrow(Exception('oops'));
+          when(
+            () => contactsRepository.editContact(
+              any(),
+            ),
+          ).thenThrow(Exception('oops'));
           return buildBloc();
         },
         seed: () => EditContactState(
           contact: mockContact,
           status: EditContactStatus.editing,
         ),
-        act: (bloc) => bloc.add(const SaveChanges()),
+        act: (bloc) => bloc.add(
+          const SaveChanges(),
+        ),
         expect: () => [
           EditContactState(
             status: EditContactStatus.posting,
@@ -147,7 +166,9 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with updated contact name',
         build: buildBloc,
-        act: (bloc) => bloc.add(const NameEditing('newname')),
+        act: (bloc) => bloc.add(
+          const NameEditing('newname'),
+        ),
         expect: () => const [
           EditContactState(
             status: EditContactStatus.editing,
@@ -169,7 +190,9 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with updated contact lastname',
         build: buildBloc,
-        act: (bloc) => bloc.add(const LastnameEditing('newLastname')),
+        act: (bloc) => bloc.add(
+          const LastnameEditing('newLastname'),
+        ),
         expect: () => const [
           EditContactState(
             status: EditContactStatus.editing,
@@ -191,7 +214,9 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with updated contact mobile',
         build: buildBloc,
-        act: (bloc) => bloc.add(const MobileEditing('newMobile')),
+        act: (bloc) => bloc.add(
+          const MobileEditing('newMobile'),
+        ),
         expect: () => const [
           EditContactState(
             status: EditContactStatus.editing,
@@ -213,7 +238,9 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with updated contact mail',
         build: buildBloc,
-        act: (bloc) => bloc.add(const MailEditing('newMail')),
+        act: (bloc) => bloc.add(
+          const MailEditing('newMail'),
+        ),
         expect: () => const [
           EditContactState(
             status: EditContactStatus.editing,
@@ -235,7 +262,9 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with updated contact address',
         build: buildBloc,
-        act: (bloc) => bloc.add(const AddressEditing('newAddress')),
+        act: (bloc) => bloc.add(
+          const AddressEditing('newAddress'),
+        ),
         expect: () => const [
           EditContactState(
             status: EditContactStatus.editing,
@@ -257,7 +286,9 @@ void main() {
       blocTest<EditContactBloc, EditContactState>(
         'emits new state with updated contact address',
         build: buildBloc,
-        act: (bloc) => bloc.add(const DesctriptionEditing('newDescription')),
+        act: (bloc) => bloc.add(
+          const DesctriptionEditing('newDescription'),
+        ),
         expect: () => const [
           EditContactState(
             status: EditContactStatus.editing,

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,15 +13,10 @@ void main() async {
 
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  final ContactListRepository _contactListRepository =
-      ContactListRepositoryFireStore(firebaseFirestore: firebaseFirestore)
-        ..refresh();
-
-  final ContactRepository _contactRepository =
-      ContactRepository(firebaseFirestore: firebaseFirestore);
+  final ContactsRepository _contactsRepository =
+      ContactsRepository(firebaseFirestore: firebaseFirestore)..refresh();
 
   runApp(App(
-    contactListRepository: _contactListRepository,
-    contactRepository: _contactRepository,
+    contactsRepository: _contactsRepository,
   ));
 }
