@@ -8,13 +8,17 @@ abstract class ContactListEvent extends Equatable {
 }
 
 class GetContactListEvent extends ContactListEvent {
-  const GetContactListEvent(this.contactList);
+  const GetContactListEvent({required this.contactList});
 
   final List<Contact> contactList;
+
+  @override
+  List<Object> get props => [contactList];
 }
 
 class SearchEvent extends ContactListEvent {
   const SearchEvent({required this.searchingWord});
+
   final String searchingWord;
 
   @override
