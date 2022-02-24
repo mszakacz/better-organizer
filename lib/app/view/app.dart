@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:contacts_repository/contacts_repository.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({
     Key? key,
     required this.contactsRepository,
@@ -13,16 +13,12 @@ class App extends StatefulWidget {
   final ContactsRepository contactsRepository;
 
   @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<ContactsRepository>.value(
-            value: widget.contactsRepository),
+          value: contactsRepository,
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
