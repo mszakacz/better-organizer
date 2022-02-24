@@ -1,5 +1,5 @@
-library contact_list_repository;
+library contacts_repository;
 
 export 'src/models/models.dart';
-export 'src/example/examplary_list.dart';
+
 export 'src/repositories/repositories.dart';

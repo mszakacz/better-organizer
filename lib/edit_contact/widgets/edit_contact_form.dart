@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:better_organizer/edit_contact/edit_contact.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 
 class EditContactForm extends StatelessWidget {
   const EditContactForm({Key? key, required this.contact}) : super(key: key);

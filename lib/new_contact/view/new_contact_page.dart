@@ -1,4 +1,4 @@
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 import '../bloc/new_contact_bloc.dart';

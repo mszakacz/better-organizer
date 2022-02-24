@@ -106,10 +106,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  contact_list_repository:
+  contacts_repository:
     dependency: "direct main"
     description:
-      path: "packages/contact_list_repository"
+      path: "packages/contacts_repository"
       relative: true
     source: path
     version: "0.0.1"
@@ -310,6 +310,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  mockingjay:
+    dependency: "direct dev"
+    description:
+      name: mockingjay
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   mocktail:
     dependency: "direct dev"
     description:

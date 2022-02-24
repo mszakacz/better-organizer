@@ -1,4 +1,4 @@
-name: contact_list_repository
+name: contacts_repository
 description: Flutter repository which contains a Contact Model and service methods for ContactList App.
 version: 0.0.1
 homepage:

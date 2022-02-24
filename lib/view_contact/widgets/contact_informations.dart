@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 import 'address_widget.dart';
 
 class ContactInformations extends StatefulWidget {

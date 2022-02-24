@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:contact_list_repository/contact_list_repository.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 import 'package:better_organizer/view_contact/view_contact.dart';
 
 class App extends StatefulWidget {
