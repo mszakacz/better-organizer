@@ -14,19 +14,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<ContactsRepository>.value(
-          value: contactsRepository,
-        ),
-      ],
+    return RepositoryProvider<ContactsRepository>.value(
+      value: contactsRepository,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => ContactListBloc(
-                contactsRepository:
-                    RepositoryProvider.of<ContactsRepository>(context)),
-          ),
           BlocProvider(
             create: (context) => ViewContactBloc(
                 contactsRepository:
