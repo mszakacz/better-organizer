@@ -2,15 +2,36 @@ import 'package:better_organizer/new_contact/new_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:better_organizer/contact_list/contact_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:contacts_repository/contacts_repository.dart';
 
-class ContactListPage extends StatefulWidget {
+class ContactListPage extends StatelessWidget {
   const ContactListPage({Key? key}) : super(key: key);
 
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => const ContactListPage(),
+    );
+  }
+
   @override
-  State<ContactListPage> createState() => _ContactListPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ContactListBloc(
+        contactsRepository: RepositoryProvider.of<ContactsRepository>(context),
+      ),
+      child: const ContactListView(),
+    );
+  }
 }
 
-class _ContactListPageState extends State<ContactListPage> {
+class ContactListView extends StatefulWidget {
+  const ContactListView({Key? key}) : super(key: key);
+
+  @override
+  State<ContactListView> createState() => _ContactListViewState();
+}
+
+class _ContactListViewState extends State<ContactListView> {
   final TextEditingController _textController = TextEditingController();
 
   @override
