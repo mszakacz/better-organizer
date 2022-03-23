@@ -1,16 +1,25 @@
 # better_organizer
 
-A new Flutter project.
+[Link to the App](https://better-organizer.web.app/#/)
 
-## Getting Started
+[Link to the Repository](https://github.com/mszakacz/better_organizer#readme)
 
-This project is a starting point for a Flutter application.
+### App functionalities:
+Application is called ‘Organizer’ because it includes functionalities that are needed in daily life as Contact List or ToDoList.
 
-A few resources to get you started if this is your first Flutter project:
+Contact List displays the list of contact, and allows user to:
+- Add new contacts, 
+- Edit existing contact,
+- Delete the contact, 
+- Find the contact (or group of contacts) using Search bar,
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Project Description:
+That’s the project I’ve done with the cooperation with my Friend. The reason was to learn how to cooperate with other Developers on one project, using GitHub together, communicate, review PR’s and support each other. I learned good convention of git commits and proper descriptions on Github. I also learned how to work on the project together with other developers.
+
+App is connected to Firebase database which allows to store the data and to use it on different devices. App uses Loading Indicators and SnackBars to make user experience smoother. Application is divided into Presentation Layout (UI and BLoC), Business Layer (UsersRepository package), Data Layer (UsersApiClient package). Code is written in the high standards way to make it easy to maintain and easy to test. We use BLoC as a state management and logic component.
+Project also contains BLoC tests, unit tests, widget tests.
+App is published using Firebase.
+
+### Key technologies:
+Firebase FireStore, BLoC, widget tests, unit tests
